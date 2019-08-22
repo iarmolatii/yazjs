@@ -1,51 +1,65 @@
 const address = {
-  street: "Elm Street",
-  building: 6,
+  city: 'Philadelphia',
+  street: "City Ave",
+  building: 8,
+  apt: 21
 }
 
-const john = {
-  firstName: "John",
-  lastName: "Doe",
-  age: 16,
+const iarmolatii = {
+  firstName: "Andrii",
+  lastName: "Iarmolatii",
+  age: 36,
   address: address
 }
 
-objectCopyDP = function(obj) {
+copyObjectDeep = function(obj) {
 
-    //Проверим наличие аршумента
-    if (obj && obj instanceof Object) {
+    //console.log(obj);
 
-        console.log(obj);
+    // Проверяем массив ли это
+    if (obj instanceof Array) {
+        console.log('... copy => Array');
+        newObject = [];
 
-        var objCopy = {};
-
-        for (var key in obj) {
-
-            //Проверим не является ли свойство ссылкой на другой обьект
-            if (obj[key] instanceof Object) {
-                console.log('... '+key + ' -> копирую ссылочный тип');
-                objCopy[key] = objectCopyDP(obj[key]);
-            }
-            else {
-                console.log('... '+key);
-                objCopy[key] = obj[key];
-            }
+        for (var i = 0;i<obj.length;i++) {
+            newObject[i] = copyObjectDeep(obj[i]);
         }
 
-        return objCopy;
+        return newObject;
     }
-    else return obj;
+    else
+        if (obj instanceof Object) {
+        console.log('... copy => Object');
+
+        newObject = {};
+
+        for (var key in obj) {
+            newObject[key] = copyObjectDeep(obj[key]);
+        }
+
+        return newObject;
+        }
+    else {
+    return obj;
 }
 
-// Тестируем ...
+    return newObject;
+}
 
+// Скопируем объект в новый
+var alex = copyObjectDeep(iarmolatii);
 
+// Изменим свойства нового скопированного объекта
+alex.firstName = 'Alex';
+alex.lastName = 'Yarmolatii';
 
-console.clear();
-const ivan = objectCopyDP(john);
-ivan.firstName = 'Ivan';
-ivan.lastName = 'Popovich';
-console.log(ivan);
-address.street = 'Akhmatova';
-console.log(john);
-console.log(ivan);
+//console.log(alex);
+
+// Изменим объект address
+address.city = 'Minsk';
+address.street = 'Kalinina';
+address.building = 6;
+address.apt = 44;
+
+console.log(iarmolatii);
+console.log(alex);
