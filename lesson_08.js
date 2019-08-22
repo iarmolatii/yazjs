@@ -1,53 +1,78 @@
 const address = {
-  city: 'Philadelphia',
-  street: "City Ave",
-  building: 8,
-  apt: 21
+    city: 'empty',
+    street: "empty",
+    building: 8,
+    apt: 21
 }
 
-const iarmolatii = {
-  firstName: "Andrii",
-  lastName: "Iarmolatii",
-  age: 36,
-  address: address
+const person = {
+    firstName: "Andrii",
+    lastName: "Iarmolatii",
+    age: 36,
+    address: address
 }
 
-copyObjectDeep = function(obj) {
+Object.defineProperty(person, "yearOfBirth", {
+    //enumerable: true,
+    get: function () {
+        return (new Date()).getFullYear - this.age;
+    },
+    set: function (newValue) {
+        this.age = (new Date()).getFullYear() - newValue;
+    }
+})
+
+
+//console.log(person);
+
+copyObjectDeep = function (obj) {
+
+
 
     //console.log(obj);
 
     // Проверяем массив ли это
     if (obj instanceof Array) {
-        console.log('... copy => Array');
+
         newObject = [];
 
-        for (var i = 0;i<obj.length;i++) {
+        for (var i = 0; i < obj.length; i++) {
             newObject[i] = copyObjectDeep(obj[i]);
         }
 
         return newObject;
-    }
-    else
-        if (obj instanceof Object) {
-        console.log('... copy => Object');
+    } else if (obj instanceof Object) {
 
         newObject = {};
 
         for (var key in obj) {
+
             newObject[key] = copyObjectDeep(obj[key]);
         }
 
-        return newObject;
+        var propArray = Object.getOwnPropertyNames(obj);
+
+        for (var i = 0; i < propArray.length; i++) {
+            var k = propArray[i];
+
+            var desc = Object.getOwnPropertyDescriptor(obj, k);
+
+            if (typeof desc.get == 'function') {
+                Object.defineProperty(obj,'get',desc);
+            }
+
         }
-    else {
-    return obj;
-}
+
+        return newObject;
+    } else {
+        return obj;
+    }
 
     return newObject;
 }
 
 // Скопируем объект в новый
-var alex = copyObjectDeep(iarmolatii);
+var alex = copyObjectDeep(person);
 
 // Изменим свойства нового скопированного объекта
 alex.firstName = 'Alex';
@@ -58,8 +83,10 @@ alex.lastName = 'Yarmolatii';
 // Изменим объект address
 address.city = 'Minsk';
 address.street = 'Kalinina';
-address.building = 6;
-address.apt = 44;
+//address.building = 6;
+//address.apt = 44;
 
-console.log(iarmolatii);
+console.log('   ');
+console.log(person);
+console.log('   ');
 console.log(alex);
