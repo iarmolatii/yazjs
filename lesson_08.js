@@ -13,7 +13,7 @@ const person = {
 }
 
 Object.defineProperty(person, "yearOfBirth", {
-    //enumerable: true,
+
     get: function () {
         return (new Date()).getFullYear - this.age;
     },
@@ -23,13 +23,7 @@ Object.defineProperty(person, "yearOfBirth", {
 })
 
 
-//console.log(person);
-
 copyObjectDeep = function (obj) {
-
-
-
-    //console.log(obj);
 
     // Проверяем массив ли это
     if (obj instanceof Array) {
@@ -41,7 +35,8 @@ copyObjectDeep = function (obj) {
         }
 
         return newObject;
-    } else if (obj instanceof Object) {
+    }
+    else if (obj instanceof Object) {
 
         newObject = {};
 
@@ -57,14 +52,15 @@ copyObjectDeep = function (obj) {
 
             var desc = Object.getOwnPropertyDescriptor(obj, k);
 
-            if (typeof desc.get == 'function') {
-                Object.defineProperty(obj,'get',desc);
+            if (typeof desc.get == 'function' || typeof desc.set == 'function') {
+                Object.defineProperty(newObject, k, desc);
             }
 
         }
 
         return newObject;
-    } else {
+    }
+    else {
         return obj;
     }
 
@@ -78,13 +74,9 @@ var alex = copyObjectDeep(person);
 alex.firstName = 'Alex';
 alex.lastName = 'Yarmolatii';
 
-//console.log(alex);
-
 // Изменим объект address
 address.city = 'Minsk';
 address.street = 'Kalinina';
-//address.building = 6;
-//address.apt = 44;
 
 console.log('   ');
 console.log(person);
