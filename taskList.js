@@ -1,8 +1,6 @@
-
-
-	/* ===================================================== */
-		function activeOrNot() {
-	/* ===================================================== */
+/* ===================================================== */
+	function activeOrNot() {
+/* ===================================================== */
 			var newTaskName = document.getElementById('new-item-text').value;
 				if (newTaskName.trim() == '') {
 				document.getElementById("defBtn").disabled = true;
@@ -180,4 +178,3 @@
 			var valueReference = localStorage.getItem('task'+i);
 			addNewTask(localStorage.getItem(valueReference));
 		}
-
