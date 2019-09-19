@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation.css" />
+    <link rel="stylesheet" href="taskList.css">
+
+<title>Task List - AI</title>
+
+</head>
+
+<body>
+
+    <div class="todo-app grid-container">
+        <h1 id="todo-title" class="app title">Tasks List <span class="hidden">Hidden</span></h1>
+        <div class="add-todo">
+            <!--form id='todo-form' class="grid-x"-->
+                <input placeholder="New Task" id='new-item-text' name="text" type="text" class="cell small-10" onkeyup="activeOrNot()" />
+                <button class="button cell small-2" id="defBtn" onclick="addNewTask()"  disabled="true">Add</button>
+			<!--/form-->
+        </div>
+        <hr />
+        <div class="todo-list">
+            <h2>Tasks:</h2>
+            <div class="todo-filter">
+                <input type="text" name='filter' id='filter' placeholder="filter"/>
+            </div>
+            <ul class="no-bullet" id="task-list">
+                <!--
+				<li class='todo-item' id="item1"><input type="checkbox" /> task 1 <a class="delete"  href="#" onclick="alert(this)">x</a></li>
+                <li class='todo-item' id="item2"><input type="checkbox" /> task 2 <a class="delete"  href="#">x</a></li>
+                <li class='todo-item' id="item3"><input type="checkbox" /> task 3 <a class="delete"  href="#">x</a></li>
+                <li class='todo-item' id="item4"><input type="checkbox" /> task 4 <a class="delete"  href="#">x</a></li>
+				-->
+            </ul>
+            <hr />
+            <button class='clear-tasks button'>Clear Tasks</button>
+        </div>
+    </div>
+<script src="taskList.js"/>
+
+</body>
+</html>

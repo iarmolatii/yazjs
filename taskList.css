@@ -1,0 +1,27 @@
+	.todo-app {
+   			margin-top: 2em;
+    		max-width: 480px;
+    		border-width: 1px;
+    		border-style: solid;
+    		border-color: #aaa;
+    		padding: 1em;
+		}
+
+		.todo-app h1 {
+			margin-bottom: 1em;
+		}
+
+		.todo-list li input {
+			margin-right: 1em;
+		}
+		.todo-list li a {
+			margin-left: 1em;
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.task-complete {
+			text-decoration: line-through;
+		}
